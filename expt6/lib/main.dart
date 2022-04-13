@@ -1,33 +1,38 @@
 import 'package:flutter/material.dart';
 
-//Example for explaining Flutter Navigation and Routing
+//Example for explaining Flutter Navigation and Routing using Named Routes
 void main() {
   runApp(MaterialApp(
-    title: 'Flutter Navigation',
+    title: 'Named Route Navigation',
     theme: ThemeData(
       // This is the theme of your application.
       primarySwatch: Colors.green,
     ),
-    home: FirstRoute(),
+    // Start the app with the "/" named route. In this case, the app starts
+    // on the FirstScreen widget.
+    initialRoute: '/',
+    routes: {
+      // When navigating to the "/" route, build the FirstScreen widget.
+      '/': (context) => HomeScreen(),
+      // When navigating to the "/second" route, build the SecondScreen widget.
+      '/second': (context) => SecondScreen(),
+    },
   ));
 }
 
-class FirstRoute extends StatelessWidget {
+class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('First Screen'),
+        title: Text('Home Screen'),
       ),
       body: Center(
         child: RaisedButton(
           child: Text('Click Here'),
           color: Colors.orangeAccent,
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SecondRoute()),
-            );
+            Navigator.pushNamed(context, '/second');
           },
         ),
       ),
@@ -35,7 +40,7 @@ class FirstRoute extends StatelessWidget {
   }
 }
 
-class SecondRoute extends StatelessWidget {
+class SecondScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +53,7 @@ class SecondRoute extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          child: Text('Go back'),
+          child: Text('Go back!'),
         ),
       ),
     );
