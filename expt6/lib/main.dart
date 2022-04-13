@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//Example for explaining Flutter Navigation and Routing
 void main() {
   runApp(MaterialApp(
     title: 'Flutter Navigation',
