@@ -1,61 +1,50 @@
 import 'package:flutter/material.dart';
 
-//Example for explaining Flutter Navigation and Routing using Named Routes
-void main() {
-  runApp(MaterialApp(
-    title: 'Named Route Navigation',
-    theme: ThemeData(
-      // This is the theme of your application.
-      primarySwatch: Colors.green,
-    ),
-    // Start the app with the "/" named route. In this case, the app starts
-    // on the FirstScreen widget.
-    initialRoute: '/',
-    routes: {
-      // When navigating to the "/" route, build the FirstScreen widget.
-      '/': (context) => HomeScreen(),
-      // When navigating to the "/second" route, build the SecondScreen widget.
-      '/second': (context) => SecondScreen(),
-    },
-  ));
-}
+//This example explains implementation of Gesture on view of App
+void main() => runApp(MyApp());
 
-class HomeScreen extends StatelessWidget {
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Home Screen'),
+    return MaterialApp(
+      title: 'Flutter Demo Application',
+      theme: ThemeData(
+        primarySwatch: Colors.green,
       ),
-      body: Center(
-        child: RaisedButton(
-          child: Text('Click Here'),
-          color: Colors.orangeAccent,
-          onPressed: () {
-            Navigator.pushNamed(context, '/second');
-          },
-        ),
-      ),
+      home: MyHomePage(),
     );
   }
 }
 
-class SecondScreen extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
+  @override
+  MyHomePageState createState() => new MyHomePageState();
+}
+
+class MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Second Screen"),
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text('Gestures Example'),
+        centerTitle: true,
       ),
-      body: Center(
-        child: RaisedButton(
-          color: Colors.blueGrey,
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          child: Text('Go back!'),
-        ),
-      ),
+      body: new Center(
+          child: GestureDetector(
+              onTap: () {
+                print('Box Clicked');
+              },
+              child: Container(
+                height: 60.0,
+                width: 120.0,
+                padding: EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                  color: Colors.blueGrey,
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                child: Center(child: Text('Click Me')),
+              ))),
     );
   }
 }
